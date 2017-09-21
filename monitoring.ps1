@@ -2,14 +2,15 @@
  # Nnetwork monitoring with powershell
 #>
 
-Function monitoring {
+
   [CmdletBinding()]
     Param(
       $ComputerName    
     )
 
-  #add to csv file 'namepc,ip'"
-  $ComputerName = Import-Csv "c:\monitoringpc.csv"
+  $ScriptPath = $PSScriptRoot
+  $ScriptPath = Split-Path $MyInvocation.MyCommand.Path
+  $ComputerName = Import-Csv "$ScriptPath\monitoringpc.csv"
   $Count = @{}
   $Countnok = @{} 
 
@@ -42,6 +43,3 @@ Function monitoring {
       Start-Sleep -Seconds 1
     }
   }
-}
-
-  monitoring

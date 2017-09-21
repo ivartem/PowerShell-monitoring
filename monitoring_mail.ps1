@@ -2,7 +2,7 @@
  # Nnetwork monitoring with send e-mail notifications
 #>
 
-Function monitoring_mail {
+
   [CmdletBinding()]
     Param(
       # Enter local e-mail server 
@@ -36,14 +36,13 @@ Function monitoring_mail {
        # NOTHING
       }
       elseif ($Count.$Computer){
+       # Change -To "<admin@example.com>"
         Send-MailMessage -From "networkmon@example.com<networkmon@example.com>" -To "<admin@example.com>"  -Encoding UTF8 -Subject "$ComputerITName ($Computer) - is UP $(Get-Date -UFormat '%Y/%m/%d %H:%M:%S')" -Body "$ComputerITName ($Computer) - is UP $(Get-Date -UFormat '%Y/%m/%d %H:%M:%S')" -BodyAsHtml
       }
       else{
+       # Change -To "<admin@example.com>"
         Send-MailMessage -From "networkmon@example.com<networkmon@example.com>" -To "<admin@example.com>" -Encoding UTF8 -Subject "$ComputerITName ($Computer) - is DOWN $(Get-Date -UFormat '%Y/%m/%d %H:%M:%S')" -Body "$ComputerITName ($Computer) - is DOWN $(Get-Date -UFormat '%Y/%m/%d %H:%M:%S')" -BodyAsHtml
       }
       Start-Sleep -Seconds 1
     }
   }
-}
-
-  monitoring_mail
